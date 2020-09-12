@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle, css } from 'styled-components'
 import normalize from 'normalize.css'
 
 import Footer from './footer'
@@ -49,22 +49,25 @@ const Main = styled.main`
       'grid '
       'aside';
   }
-
-  @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 300px;
-    grid-template-areas:
-      'header .'
-      'grid aside';
-  }
+  ${props =>
+    !props.notFound &&
+    css`
+      @media screen and (min-width: 768px) {
+        grid-template-columns: 1fr 300px;
+        grid-template-areas:
+          'header .'
+          'grid aside';
+      }
+    `}
 `
 
-const Layout = ({ children }) => {
+const Layout = ({ children, notFound }) => {
   return (
     <ThemeProvider>
       <>
         <Style />
         <Header siteTitle="Dependency Page" />
-        <Main>{children}</Main>
+        <Main notFound={notFound}>{children}</Main>
         <Footer />
       </>
     </ThemeProvider>

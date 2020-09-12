@@ -16,6 +16,23 @@ const Wrapper = styled(Element)`
   overflow: hidden;
 `
 
+const MaxWithLink = styled(Link)`
+  max-width: 100%;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+`
+
+const LinkWrapper = styled(Stack)`
+  svg {
+    flex-basis: 13px;
+    flex-shrink: 0;
+  }
+`
+
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
@@ -181,28 +198,36 @@ const Sidebar = ({ sandboxes }) => {
       </Text>
 
       {links.homepage && (
-        <Stack align="center" gap={2} marginTop={4}>
+        <LinkWrapper align="center" gap={2} marginTop={4}>
           <GlobeIcon> </GlobeIcon>
-          <Link href={links.homepage}>{cleanURL(links.homepage)}</Link>
-        </Stack>
+          <MaxWithLink href={links.homepage} title={links.homepage}>
+            {cleanURL(links.homepage)}
+          </MaxWithLink>
+        </LinkWrapper>
       )}
       {links.repository && (
-        <Stack align="center" gap={2} marginTop={4}>
+        <LinkWrapper align="center" gap={2} marginTop={4}>
           <GHIcon></GHIcon>
-          <Link href={links.repository}>{cleanURL(links.repository)}</Link>
-        </Stack>
+          <MaxWithLink href={links.repository} title={links.repository}>
+            {cleanURL(links.repository)}
+          </MaxWithLink>
+        </LinkWrapper>
       )}
       {links.bugs && (
-        <Stack align="center" gap={2} marginTop={4}>
+        <LinkWrapper align="center" gap={2} marginTop={4}>
           <IssuesIcon></IssuesIcon>
-          <Link href={links.bugs}>{cleanURL(links.bugs)}</Link>
-        </Stack>
+          <MaxWithLink href={links.bugs} title={links.bugs}>
+            {cleanURL(links.bugs)}
+          </MaxWithLink>
+        </LinkWrapper>
       )}
       {links.npm && (
-        <Stack align="center" gap={2} marginTop={4}>
+        <LinkWrapper align="center" gap={2} marginTop={4}>
           <NPMIcon></NPMIcon>
-          <Link href={links.npm}>@{cleanNPM(links.npm)}</Link>
-        </Stack>
+          <MaxWithLink href={links.npm} title={links.npm}>
+            @{cleanNPM(links.npm)}
+          </MaxWithLink>
+        </LinkWrapper>
       )}
       {info.metadata.maintainers && (
         <>
@@ -235,11 +260,17 @@ const Sidebar = ({ sandboxes }) => {
                   key={maintainer.username}
                   as="img"
                   css={{
+                    display: 'block',
+                    width: 32,
+                    height: 32,
+                    overflow: 'hidden',
+                    background: 'white',
                     'border-radius': designLanguage.radii.small + 'px',
                     border: '1px solid' + designLanguage.colors.grays[600]
                   }}
                   src={`https://github.com/${maintainer.username}.png?size=40`}
                   alt={maintainer.username}
+                  title={maintainer.username}
                   width="32"
                   height="32"
                 />

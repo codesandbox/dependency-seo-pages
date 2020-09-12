@@ -43,7 +43,7 @@ const NotFoundPage = props => {
 
   if (error) {
     return (
-      <Layout>
+      <Layout notFound>
         <SEO title={`${name} examples - CodeSandbox`} pkg={name} />
         <Text block align="center" size={40} weight="400" as="h1">
           Not found
