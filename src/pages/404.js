@@ -5,7 +5,7 @@ import Main from '../components/main'
 import { Text } from '@codesandbox/components'
 import algoliasearch from 'algoliasearch'
 
-const client = algoliasearch('ZACZHDBO7S', process.env.GATSBY_READ_KEY)
+const client = algoliasearch('5O7BRBEIVD', process.env.GATSBY_READ_KEY)
 const index = client.initIndex('prod_sandboxes')
 
 const capitalize = s => {
