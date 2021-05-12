@@ -8,7 +8,7 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
   const { createNode } = actions
 
   const index = addMethods(
-    algoliasearch('ZACZHDBO7S', configOptions.apiKey).initIndex(
+    algoliasearch('5O7BRBEIVD', configOptions.apiKey).initIndex(
       configOptions.index
     ),
     { customBrowse }
