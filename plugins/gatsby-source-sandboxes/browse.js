@@ -4,6 +4,7 @@ const { createBrowsablePromise } = require('@algolia/client-search')
 
 const customBrowse = base => {
   return ({ limit, ...requestOptions }) => {
+    console.log('limit: ' + limit)
     return createBrowsablePromise({
       ...requestOptions,
       shouldStop: response => {
