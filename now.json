@@ -1,8 +1,0 @@
-{
-  "build": {
-    "env": {
-      "ALGOLIA_KEY": "@algolia_key",
-      "ALGOLIA_INDEX": "@algolia_index"
-    }
-  }
-}
