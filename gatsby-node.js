@@ -18,6 +18,9 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors
     }
 
+    console.log(
+      'Creating pages: ' + result.data.allSandboxDependency.edges.length
+    )
     // Create dependency pages.
     result.data.allSandboxDependency.edges.forEach(edge => {
       createPage({
