@@ -51,6 +51,7 @@ exports.sourceNodes = async ({ actions }, configOptions) => {
   }, [])
 
   console.log('creating data')
+  console.log('npmDeps size: ' + npmDeps.length)
   npmDeps.forEach(datum =>
     createNode({
       ...datum,
