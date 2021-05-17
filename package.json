@@ -31,8 +31,11 @@
     "url": "https://github.com/codesandbox/dependency-seo-pages/issues"
   },
   "dependencies": {
+    "@types/react": "^17.0.5",
+    "algoliasearch": "^4.9.1",
     "next": "^10.2.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "typescript": "^4.2.4"
   }
 }
