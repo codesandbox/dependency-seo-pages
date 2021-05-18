@@ -126,27 +126,31 @@ const Main: React.FC<{
                         <Text block>{a.title || a.objectID}</Text>
                       </Link>
 
-                      <Link href={url}>
-                        <Text
-                          block
-                          marginTop={2}
-                          variant="muted"
-                          css={
-                            {
-                              height: 36,
-                              lineHeight: 1.5,
-                              wordBreak: 'break-all',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              display: '-webkit-box',
-                              '-webkit-line-clamp': '2',
-                              WebkitBoxOrient: 'vertical'
-                            } as CSSProperties
-                          }
-                        >
-                          {a.description}
-                        </Text>
-                      </Link>
+                      {a.description ? (
+                        <Link href={url}>
+                          <Text
+                            block
+                            marginTop={2}
+                            variant="muted"
+                            css={
+                              {
+                                height: 36,
+                                lineHeight: 1.5,
+                                wordBreak: 'break-all',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                display: '-webkit-box',
+                                '-webkit-line-clamp': '2',
+                                WebkitBoxOrient: 'vertical'
+                              } as CSSProperties
+                            }
+                          >
+                            {a.description}
+                          </Text>
+                        </Link>
+                      ) : (
+                        <Element css={{ height: 36 }} />
+                      )}
                     </div>
                     <Stack align="center" justify="space-between" marginTop={5}>
                       {a.author ? (

@@ -2,6 +2,7 @@ import React from 'react'
 
 export const Logo: React.FC = (props) => (
   <svg width={24} height={24} fill="none" viewBox="0 0 23 23" {...props}>
+    <title>CodeSandbox</title>
     <path
       fill="#999"
       fillRule="evenodd"
