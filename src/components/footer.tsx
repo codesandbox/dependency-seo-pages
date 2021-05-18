@@ -24,6 +24,15 @@ export const Nav = styled.section`
   a {
     color: inherit;
     text-decoration: none;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    display: inline-block;
+    width: 100%;
+
+    @media screen and (max-width: 768px) {
+      min-height: 48px;
+    }
+
     &:hover {
       color: ${theme.colors.white};
     }
@@ -41,7 +50,7 @@ export const Nav = styled.section`
 const Footer: React.FC = () => (
   <FooterWrapper>
     <Nav>
-      <Element as="ul" css={{ li: { marginBottom: 8 } }}>
+      <Element as="ul">
         <li>
           <Text size={23}>Product</Text>
         </li>
@@ -66,7 +75,7 @@ const Footer: React.FC = () => (
           </Text>
         </li>
       </Element>
-      <Element as="ul" css={{ li: { marginBottom: 8 } }}>
+      <Element as="ul">
         <li>
           <Text size={23}>Explore</Text>
         </li>
@@ -83,7 +92,7 @@ const Footer: React.FC = () => (
           </Text>
         </li>
       </Element>
-      <Element as="ul" css={{ li: { marginBottom: 8 } }}>
+      <Element as="ul">
         <li>
           <Text size={23}>Use Cases</Text>
         </li>
@@ -126,7 +135,7 @@ const Footer: React.FC = () => (
         </li>
       </Element>
 
-      <Element as="ul" css={{ li: { marginBottom: 8 } }}>
+      <Element as="ul">
         <li>
           <Text size={23}>About</Text>
         </li>
@@ -157,7 +166,7 @@ const Footer: React.FC = () => (
         </li>
       </Element>
 
-      <Element as="ul" css={{ li: { marginBottom: 8 } }}>
+      <Element as="ul">
         <li>
           <Text size={23}>Support</Text>
         </li>

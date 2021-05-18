@@ -118,6 +118,7 @@ const Main: React.FC<{
                       alt={a.title || a.objectID}
                       src={getScreenshot(a.objectID)}
                       height={162}
+                      loading="lazy"
                     />
                   </Link>
                   <Element paddingX={4} paddingTop={4} paddingBottom={5}>
