@@ -13,7 +13,7 @@ const NotFoundPage = () => {
     ? router.query.slug[router.query.slug.length - 1]
     : router.query.slug
 
-  const name = queryName
+  const name = (queryName ?? '')
     .split('-')
     .map((a) => capitalize(a))
     .join(' ')
