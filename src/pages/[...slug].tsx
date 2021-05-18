@@ -38,6 +38,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params
 
+  // No valid slug
   if (!Array.isArray(slug) || !slug[1]) {
     return { notFound: true }
   }
@@ -45,6 +46,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const [_, packageName] = slug
   const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
   const packageInfo = await getPackageInfo(packageName)
+
+  // No data
+  if (!packageInfo.info || !sandboxes) {
+    return { notFound: true }
+  }
 
   return {
     props: { sandboxes, packageName, hasMoreToLoad, packageInfo },
