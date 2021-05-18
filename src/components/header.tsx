@@ -6,8 +6,8 @@ import {
   Link,
   SearchInput
 } from '@codesandbox/components'
-import Logo from './logo'
 import { theme } from './theme'
+import { Logo } from './icons'
 
 const Header: React.FC<{ siteTitle: string }> = () => {
   const [value, setValue] = useState('')

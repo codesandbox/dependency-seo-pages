@@ -115,7 +115,7 @@ const Main: React.FC<{
                   <Link href={url}>
                     <ScreenShot
                       className="screenshot"
-                      alt={a.title}
+                      alt={a.title || a.objectID}
                       src={getScreenshot(a.objectID)}
                       height={162}
                     />

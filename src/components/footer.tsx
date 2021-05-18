@@ -2,10 +2,8 @@ import React from 'react'
 import { Text, Stack, Link, Element } from '@codesandbox/components'
 import styled from 'styled-components'
 
-import Github from './GitHub'
-import Spectrum from './spectrum'
-import Twitter from './twitter'
 import { theme } from './theme'
+import { Github, Twitter, Spectrum } from './icons'
 
 export const FooterWrapper = styled.footer`
   padding-bottom: 1rem;
@@ -180,7 +178,7 @@ const Footer: React.FC = () => (
         </li>
       </Element>
     </Nav>
-    <Stack align="center" justify="center" gap={4}>
+    <Stack align="center" justify="center" gap={4} as="ul">
       <li>
         <a
           title="Go to Github"
