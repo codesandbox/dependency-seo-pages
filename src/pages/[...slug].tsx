@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 
 import { searchDependency } from '../services/algolia'
@@ -31,11 +31,7 @@ const HomePage: React.FC<{
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: true }
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug } = context.params
 
   // No valid slug
