@@ -3,7 +3,7 @@ import { Text, Stack, Link, Element } from '@codesandbox/components'
 import styled from 'styled-components'
 
 import { theme } from './theme'
-import { Github, Twitter, Spectrum } from './icons'
+import { Github, Twitter, Discord } from './icons'
 
 export const FooterWrapper = styled.footer`
   padding-bottom: 1rem;
@@ -47,146 +47,136 @@ export const Nav = styled.section`
   }
 `
 
+const footerNavElements = [
+  {
+    title: 'Product',
+    elements: [
+      {
+        text: 'Coding',
+        link: '/coding'
+      },
+      {
+        text: 'Prototyping',
+        link: '/prototyping'
+      },
+      {
+        text: 'Knowledge Sharing',
+        link: '/knowledge-sharing'
+      },
+      {
+        text: 'Feedback',
+        link: '/feedback'
+      },
+      {
+        text: 'What’s New',
+        link: '/changelog'
+      }
+    ]
+  },
+  {
+    title: 'Explore',
+    elements: [
+      {
+        text: 'Featured Sandboxes',
+        link: '/explore'
+      },
+      {
+        external: true,
+        text: 'Search Sandboxes',
+        link: '/search'
+      }
+    ]
+  },
+  {
+    title: 'For',
+    elements: [
+      {
+        text: 'Individuals',
+        link: '/personal'
+      },
+      {
+        text: 'Teams',
+        link: '/team'
+      },
+      {
+        text: 'Enterprise',
+        link: '/enterprise'
+      }
+    ]
+  },
+  {
+    title: 'About',
+    elements: [
+      {
+        text: 'Pricing',
+        link: '/pricing'
+      },
+      {
+        text: 'Company',
+        link: '/company'
+      },
+      {
+        text: 'Blog',
+        link: '/blog'
+      },
+      {
+        text: 'Podcasts',
+        link: '/podcasts'
+      },
+      {
+        text: 'Careers',
+        link: '/jobs'
+      },
+      {
+        text: 'Terms Of Use',
+        link: '/legal/terms'
+      },
+      {
+        text: 'Privacy Policy',
+        link: '/legal/privacy'
+      }
+    ]
+  },
+  {
+    title: 'Support',
+    elements: [
+      {
+        text: 'Documentation',
+        link: '/docs'
+      },
+      {
+        text: 'Contact Support',
+        external: true,
+        link: 'mailto:hello@codesandbox.io'
+      },
+      {
+        text: 'Status',
+        external: true,
+        link: 'https://status.codesandbox.io/'
+      }
+    ]
+  }
+]
+
 const Footer: React.FC = () => (
   <FooterWrapper>
     <Nav>
-      <Element as="ul">
-        <li>
-          <Text size={23}>Product</Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/ide">Online IDE</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/embeds">Embed</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/ci">CodeSandbox CI</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/team">Teams</Link>
-          </Text>
-        </li>
-      </Element>
-      <Element as="ul">
-        <li>
-          <Text size={23}>Explore</Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/explore">
-              Featured Sandboxes
-            </Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <a href="/search">Search Sandboxes</a>
-          </Text>
-        </li>
-      </Element>
-      <Element as="ul">
-        <li>
-          <Text size={23}>Use Cases</Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/prototyping">Prototyping</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/learning">Learning</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/hiring">Hiring</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/onboarding">Onboarding</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/collaboration">
-              Collaboration
-            </Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/open-source">Open Source</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/devrel">DevRel</Link>
-          </Text>
-        </li>
-      </Element>
-
-      <Element as="ul">
-        <li>
-          <Text size={23}>About</Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/company">Company</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/blog">Blog</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/pricing">Pricing</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/jobs">Careers</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/legal">Legal</Link>
-          </Text>
-        </li>
-      </Element>
-
-      <Element as="ul">
-        <li>
-          <Text size={23}>Support</Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <Link href="https://codesandbox.io/docs">Documentation</Link>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <a href="mailto:hello@codesandbox.io">Contact Support</a>
-          </Text>
-        </li>
-        <li>
-          <Text variant="muted">
-            <a href="https://status.codesandbox.io">Status</a>
-          </Text>
-        </li>
-      </Element>
+      {footerNavElements.map((menu) => (
+        <Element as="ul">
+          <li>
+            <Text size={23}>{menu.title}</Text>
+          </li>
+          {menu.elements.map(({ text, link }) => (
+            <li key={text}>
+              <Text variant="muted">
+                <Link href={`https://codesandbox.io/${link}`}>{text}</Link>
+              </Text>
+            </li>
+          ))}
+        </Element>
+      ))}
     </Nav>
+
     <Stack align="center" justify="center" gap={4} as="ul">
       <li>
         <a
@@ -202,8 +192,8 @@ const Footer: React.FC = () => (
         </a>
       </li>
       <li>
-        <a title="Go to Spectrum" href="https://spectrum.chat/codesandbox">
-          <Spectrum />
+        <a title="Go to Spectrum" href="https://discord.com/invite/5BpufEP7MH">
+          <Discord />
         </a>
       </li>
     </Stack>
