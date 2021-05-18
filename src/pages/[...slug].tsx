@@ -3,11 +3,13 @@ import { useRouter } from 'next/router'
 
 import { searchDependency } from '../services/algolia'
 import SEO from '../components/seo'
+import Main from '../components/main'
 
-const HomePage: React.FC<{ sandboxes?: any[]; dependency?: string }> = ({
-  sandboxes,
-  dependency
-}) => {
+const HomePage: React.FC<{
+  sandboxes?: any[]
+  dependency?: string
+  hasMoreToLoad: boolean
+}> = ({ sandboxes, dependency, hasMoreToLoad }) => {
   const router = useRouter()
 
   if (router.isFallback) {
@@ -17,12 +19,17 @@ const HomePage: React.FC<{ sandboxes?: any[]; dependency?: string }> = ({
   return (
     <>
       <SEO pkg={dependency} title={`${dependency} examples - CodeSandbox`} />
-      <div>
+      <Main
+        dependency={dependency}
+        sandboxes={sandboxes}
+        hasMoreToLoad={hasMoreToLoad}
+      />
+      {/* <div>
         {dependency}
         {sandboxes?.map((e) => (
           <p>{e.title}</p>
         ))}
-      </div>
+      </div> */}
     </>
   )
 }
@@ -39,10 +46,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 
   const [_, dependency] = slug
-  const sandboxes = await searchDependency(dependency)
+  const { sandboxes, hasMoreToLoad } = await searchDependency(dependency)
 
   return {
-    props: { sandboxes, dependency },
+    props: { sandboxes, dependency, hasMoreToLoad },
     revalidate: 6.048e8 // 1 week
   }
 }

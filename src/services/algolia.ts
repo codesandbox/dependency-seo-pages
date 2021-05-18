@@ -8,11 +8,19 @@ const SEARCH_INDEX = 'prod_sandboxes'
 const client = algoliaSearch(APP_ID, SEARCH_KEY)
 const algoliaIndex = client.initIndex(SEARCH_INDEX)
 
-export const searchDependency = async (packageName: string) => {
+export const searchDependency = async (
+  packageName: string
+): Promise<{
+  sandboxes: any[]
+  hasMoreToLoad: boolean
+}> => {
   const data = await algoliaIndex.search('', {
     facetFilters: [`npm_dependencies.dependency:${packageName}`],
     hitsPerPage: 13
   })
 
-  return data.hits.slice(0, MAX_HITS)
+  return {
+    sandboxes: data.hits.slice(0, MAX_HITS),
+    hasMoreToLoad: data.hits.length > MAX_HITS
+  }
 }
