@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
 
 import { searchDependency } from '../services/algolia'
 import SEO from '../components/seo'
@@ -12,12 +11,6 @@ const HomePage: React.FC<{
   hasMoreToLoad?: boolean
   packageInfo?: PackageInfo
 }> = ({ sandboxes, packageName, packageInfo, hasMoreToLoad }) => {
-  const router = useRouter()
-
-  if (router.isFallback) {
-    return <div>Loading...</div>
-  }
-
   return (
     <>
       <SEO pkg={packageName} title={`${packageName} examples - CodeSandbox`} />
@@ -49,8 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { sandboxes, packageName, hasMoreToLoad, packageInfo },
-    revalidate: 6.048e8 // 1 week
+    props: { sandboxes, packageName, hasMoreToLoad, packageInfo }
   }
 }
 
