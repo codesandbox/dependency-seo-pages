@@ -12,6 +12,8 @@
     "lint": "eslint '**/*.ts?(x)'"
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.9",
+    "@types/react": "^17.0.5",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
@@ -21,7 +23,21 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^4.0.8"
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "babel-plugin-styled-components": "^1.10.7"
+  },
+  "dependencies": {
+    "@codesandbox/common": "^1.0.8",
+    "@codesandbox/components": "^0.0.1",
+    "@codesandbox/template-icons": "^1.1.0",
+    "algoliasearch": "^4.9.1",
+    "next": "^10.2.0",
+    "normalize.css": "^8.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "~4.4.1",
+    "typeface-inter": "^3.18.1",
+    "typescript": "^4.2.4"
   },
   "repository": {
     "type": "git",
@@ -29,13 +45,5 @@
   },
   "bugs": {
     "url": "https://github.com/codesandbox/dependency-seo-pages/issues"
-  },
-  "dependencies": {
-    "@types/react": "^17.0.5",
-    "algoliasearch": "^4.9.1",
-    "next": "^10.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "typescript": "^4.2.4"
   }
 }
