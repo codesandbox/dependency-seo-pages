@@ -8,6 +8,18 @@ import {
 } from '@codesandbox/components'
 import { theme } from './theme'
 import { Logo } from './icons'
+import styled from 'styled-components'
+
+const LogoLink = styled(Link)`
+  @media screen and (max-width: 768px) {
+    height: 48px;
+    width: 48px;
+    display: flex;
+    svg {
+      margin: auto;
+    }
+  }
+`
 
 const Header: React.FC<{ siteTitle: string }> = () => {
   const [value, setValue] = useState('')
@@ -31,29 +43,38 @@ const Header: React.FC<{ siteTitle: string }> = () => {
           margin: 'auto'
         }}
       >
-        <Link href="https://codesandbox.io">
+        <LogoLink href="https://codesandbox.io">
           <Logo />
-        </Link>
+        </LogoLink>
         <Stack gap={2} align="center">
-          <SearchInput
-            style={{ padding: '0 1.5rem', margin: '0 0 0 -.25rem' }}
-            placeholder="Search CodeSandbox"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setValue(e.target.value)
-            }
-            value={value}
-            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-              if (e.key === 'Enter' && typeof window !== 'undefined') {
-                window.location.href = `https://codesandbox.io/search?query=${value}&page=1&configure%5BhitsPerPage%5D=12`
-              }
+          <Element
+            css={{
+              '@media screen and (max-width: 768px)': {
+                display: 'none'
+              },
+              padding: '0 1.5rem',
+              margin: '0 0 0 -.25rem'
             }}
-          />
+          >
+            <SearchInput
+              placeholder="Search CodeSandbox"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setValue(e.target.value)
+              }
+              value={value}
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                if (e.key === 'Enter' && typeof window !== 'undefined') {
+                  window.location.href = `https://codesandbox.io/search?query=${value}&page=1&configure%5BhitsPerPage%5D=12`
+                }
+              }}
+            />
+          </Element>
 
           <Button
             variant="secondary"
             as="a"
             href="https://codesandbox.io/s"
-            style={{
+            css={{
               textDecoration: 'none',
               width: 'auto',
               height: '26px',
