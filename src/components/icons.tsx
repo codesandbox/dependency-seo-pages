@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const GlobeIcon = props => (
+export const GlobeIcon: React.FC = (props) => (
   <svg width={12} height={12} fill="none" viewBox="0 0 12 12" {...props}>
     <path
       fill="#fff"
@@ -9,7 +9,7 @@ export const GlobeIcon = props => (
   </svg>
 )
 
-export const GHIcon = props => (
+export const GHIcon: React.FC = (props) => (
   <svg width={12} height={12} fill="none" viewBox="0 0 12 12" {...props}>
     <path
       fill="#999"
@@ -18,7 +18,7 @@ export const GHIcon = props => (
   </svg>
 )
 
-export const IssuesIcon = props => (
+export const IssuesIcon: React.FC = (props) => (
   <svg width={13} height={13} fill="none" viewBox="0 0 13 13" {...props}>
     <path
       fill="#999"
@@ -29,7 +29,7 @@ export const IssuesIcon = props => (
   </svg>
 )
 
-export const NPMIcon = props => (
+export const NPMIcon: React.FC = (props) => (
   <svg width={12} height={12} fill="none" viewBox="0 0 12 12" {...props}>
     <path
       fill="#999"

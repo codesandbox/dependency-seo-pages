@@ -1,10 +1,11 @@
 import React from 'react'
 import { Text, Stack, Link, Element } from '@codesandbox/components'
 import styled from 'styled-components'
+
 import Github from './GitHub'
 import Spectrum from './spectrum'
 import Twitter from './twitter'
-import designLanguage from '@codesandbox/components/lib/design-language/index'
+import { theme } from './theme'
 
 export const FooterWrapper = styled.footer`
   padding-bottom: 1rem;
@@ -14,7 +15,7 @@ export const FooterWrapper = styled.footer`
 
 export const Nav = styled.section`
   padding-top: 2.5rem;
-  border-top: 1px solid ${designLanguage.colors.grays[600]};
+  border-top: 1px solid ${theme.colors.grays[600]};
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   grid-gap: 3rem;
@@ -26,7 +27,7 @@ export const Nav = styled.section`
     color: inherit;
     text-decoration: none;
     &:hover {
-      color: ${designLanguage.colors.white};
+      color: ${theme.colors.white};
     }
   }
   ul {
@@ -39,7 +40,7 @@ export const Nav = styled.section`
   }
 `
 
-const Footer = () => (
+const Footer: React.FC = () => (
   <FooterWrapper>
     <Nav>
       <Element as="ul" css={{ li: { marginBottom: 8 } }}>

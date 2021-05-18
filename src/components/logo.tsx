@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Logo = props => (
+const Logo: React.FC = (props) => (
   <svg width={24} height={24} fill="none" viewBox="0 0 23 23" {...props}>
     <path
       fill="#999"

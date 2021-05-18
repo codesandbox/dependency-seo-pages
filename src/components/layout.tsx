@@ -34,6 +34,7 @@ const Main = styled.main`
   padding: 0 1rem;
   display: grid;
   grid-gap: 1rem;
+  min-height: 50vh;
 
   grid-template-columns: 1fr;
   column-gap: 2rem;
