@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Text, Element, Stack, Link } from '@codesandbox/components'
 import styled from 'styled-components'
 import { GlobeIcon, GHIcon, IssuesIcon, NPMIcon } from './icons'
-import { Sandboxes } from '../services/algolia'
 import { theme } from './theme'
+import { cleanNPM, cleanURL, numberWithCommas } from './utils'
+import { PackageInfo } from '../services/packageIndo'
 
 const Wrapper = styled(Element)`
   background: ${theme.colors.grays[700]};
@@ -34,17 +35,6 @@ const LinkWrapper = styled(Stack)`
   }
 `
 
-function numberWithCommas(x: number) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-}
-
-const cleanURL = (url: string) => url.split('https://')[1]
-const cleanNPM = (url: string) =>
-  url
-    .split('https://www.npmjs.com/package/')[1]
-    .replace(/%2F/g, '/')
-    .replace(/%40/g, '')
-
 const getInfo = async (name: string) => {
   const data = await fetch(
     `https://api.npms.io/v2/package/${name
@@ -63,51 +53,8 @@ const getSize = async (name: string) => {
   return data
 }
 
-const Sidebar: React.FC<{ dependency: string; sandboxes: Sandboxes }> = ({
-  sandboxes,
-  dependency
-}) => {
-  interface Info {
-    metadata?: {
-      description?: string
-      version?: string
-      license?: string
-      dependentsCount?: number
-      maintainers?: { username: string }[]
-      links?: {
-        homepage?: string
-        repository?: string
-        bugs?: string
-        npm?: string
-      }
-    }
-    npm?: {
-      downloads?: { count: number }[]
-      dependentsCount: number
-    }
-    github?: {
-      issues?: {
-        count?: string
-      }
-      starsCount?: string
-    }
-  }
-
-  interface Size {
-    size?: number
-  }
-
-  const [info, setInfo] = useState<Info>({})
-  const [size, setSize] = useState<Size>({})
-
-  useEffect(() => {
-    if (!info.metadata) {
-      getInfo(dependency).then(setInfo)
-    }
-    if (!size.size) {
-      getSize(dependency).then(setSize)
-    }
-  }, [])
+const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
+  const { info, size } = packageInfo
 
   const downloads = info.npm?.downloads ?? 0
   const links = info.metadata?.links || {}
@@ -174,13 +121,13 @@ const Sidebar: React.FC<{ dependency: string; sandboxes: Sandboxes }> = ({
         }}
         paddingTop={4}
       >
-        {size.size && (
+        {size && (
           <Element>
             <Text block variant="muted">
               Size
             </Text>
             <Text block paddingTop={1}>
-              {size.size / 1000}Kb
+              {size / 1000}Kb
             </Text>
           </Element>
         )}

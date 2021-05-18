@@ -12,3 +12,14 @@ export const getUrlLoadMore = (id: string) =>
 export const getUrlAuthor = (id: string) => `https://codesandbox.io/u/${id}`
 
 export const getUrlSandbox = (id: string) => `https://codesandbox.io/s/${id}`
+
+export const cleanURL = (url: string) => url.split('https://')[1]
+
+export const cleanNPM = (url: string) =>
+  url
+    .split('https://www.npmjs.com/package/')[1]
+    .replace(/%2F/g, '/')
+    .replace(/%40/g, '')
+
+export const numberWithCommas = (x: number) =>
+  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')

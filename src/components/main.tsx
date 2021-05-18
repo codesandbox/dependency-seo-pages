@@ -12,6 +12,7 @@ import {
 } from '../components/utils'
 import { theme } from './theme'
 import { Sandboxes } from '../services/algolia'
+import { PackageInfo } from '../services/packageIndo'
 
 const ScreenShot = styled.img`
   object-fit: cover;
@@ -73,10 +74,11 @@ const Card = styled.div`
 
 const Main: React.FC<{
   hasMoreToLoad: boolean
-  dependency: string
+  packageName: string
+  packageInfo: PackageInfo
   sandboxes: Sandboxes
-}> = ({ dependency, sandboxes, hasMoreToLoad }) => {
-  const name = dependency
+}> = ({ packageName, packageInfo, sandboxes, hasMoreToLoad }) => {
+  const name = packageName
     .split('-')
     .map((a) => capitalize(a))
     .join(' ')
@@ -96,8 +98,8 @@ const Main: React.FC<{
           variant="muted"
           style={{ maxWidth: 600, lineHeight: 1.6 }}
         >
-          Learn how to use {dependency} by viewing and forking example apps that
-          make use of {dependency} on CodeSandbox.
+          Learn how to use {packageName} by viewing and forking example apps
+          that make use of {packageName} on CodeSandbox.
         </Text>
       </div>
 
@@ -129,9 +131,10 @@ const Main: React.FC<{
                           block
                           marginTop={2}
                           variant="muted"
-                          style={
+                          css={
                             {
-                              height: 28,
+                              height: 36,
+                              lineHeight: 1.5,
                               wordBreak: 'break-all',
                               overflow: 'hidden',
                               textOverflow: 'ellipsis',
@@ -176,7 +179,7 @@ const Main: React.FC<{
               as="a"
               marginTop={4}
               style={{ textDecoration: 'none' }}
-              href={getUrlLoadMore(dependency)}
+              href={getUrlLoadMore(packageName)}
               variant="secondary"
             >
               Find more examples
@@ -184,7 +187,7 @@ const Main: React.FC<{
           )}
         </div>
       </MainComponent>
-      <Sidebar sandboxes={sandboxes} dependency={dependency} />
+      <Sidebar packageInfo={packageInfo} />
     </>
   )
 }
