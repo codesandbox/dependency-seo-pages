@@ -11,7 +11,7 @@ import {
   getUrlSandbox
 } from '../components/utils'
 import { theme } from './theme'
-import { TemplateType } from '@codesandbox/common/lib/templates'
+import { Sandboxes } from '../services/algolia'
 
 const ScreenShot = styled.img`
   object-fit: cover;
@@ -72,19 +72,9 @@ const Card = styled.div`
 `
 
 const Main: React.FC<{
-  dependency: string
   hasMoreToLoad: boolean
-  sandboxes: {
-    objectID: string
-    title?: string
-    description?: string
-    template?: TemplateType
-    author?: {
-      name?: string
-      avatar_url?: string
-      username?: string
-    }
-  }[]
+  dependency: string
+  sandboxes: Sandboxes
 }> = ({ dependency, sandboxes, hasMoreToLoad }) => {
   const name = dependency
     .split('-')
@@ -194,7 +184,7 @@ const Main: React.FC<{
           )}
         </div>
       </MainComponent>
-      {/* <Sidebar sandboxes={dependency} /> */}
+      <Sidebar sandboxes={sandboxes} dependency={dependency} />
     </>
   )
 }

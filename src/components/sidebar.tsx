@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Text, Element, Stack, Link } from '@codesandbox/components'
-import designLanguage from '@codesandbox/components/lib/design-language/index'
 import styled from 'styled-components'
 import { GlobeIcon, GHIcon, IssuesIcon, NPMIcon } from './icons'
+import { Sandboxes } from '../services/algolia'
+import { theme } from './theme'
 
 const Wrapper = styled(Element)`
-  background: ${designLanguage.colors.grays[700]};
-  border-radius: ${designLanguage.radii.medium}px;
-  border: 1px solid ${designLanguage.colors.grays[600]};
+  background: ${theme.colors.grays[700]};
+  border-radius: ${theme.radii.medium}px;
+  border: 1px solid ${theme.colors.grays[600]};
   position: sticky;
   top: 20px;
   padding: 2rem;
@@ -16,7 +17,7 @@ const Wrapper = styled(Element)`
   overflow: hidden;
 `
 
-const MaxWithLink = styled(Link)`
+const MaxWithLink = styled(Link)<{ title: string }>`
   max-width: 100%;
   word-break: break-all;
   overflow: hidden;
@@ -33,50 +34,83 @@ const LinkWrapper = styled(Stack)`
   }
 `
 
-function numberWithCommas(x) {
+function numberWithCommas(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
-const cleanURL = url => url.split('https://')[1]
-const cleanNPM = url =>
+const cleanURL = (url: string) => url.split('https://')[1]
+const cleanNPM = (url: string) =>
   url
     .split('https://www.npmjs.com/package/')[1]
     .replace(/%2F/g, '/')
     .replace(/%40/g, '')
 
-const getInfo = async name => {
+const getInfo = async (name: string) => {
   const data = await fetch(
     `https://api.npms.io/v2/package/${name
       .replace(/\//g, '%2F')
       .replace(/@/g, '%40')}`
-  ).then(rsp => rsp.json())
+  ).then((rsp) => rsp.json())
 
   return data.collected
 }
 
-const getSize = async name => {
+const getSize = async (name: string) => {
   const data = await fetch(
     `https://bundlephobia.com/api/size?package=${name}`
-  ).then(rsp => rsp.json())
+  ).then((rsp) => rsp.json())
 
   return data
 }
 
-const Sidebar = ({ sandboxes }) => {
-  const [info, setInfo] = useState({})
-  const [size, setSize] = useState({})
+const Sidebar: React.FC<{ dependency: string; sandboxes: Sandboxes }> = ({
+  sandboxes,
+  dependency
+}) => {
+  interface Info {
+    metadata?: {
+      description?: string
+      version?: string
+      license?: string
+      dependentsCount?: number
+      maintainers?: { username: string }[]
+      links?: {
+        homepage?: string
+        repository?: string
+        bugs?: string
+        npm?: string
+      }
+    }
+    npm?: {
+      downloads?: { count: number }[]
+      dependentsCount: number
+    }
+    github?: {
+      issues?: {
+        count?: string
+      }
+      starsCount?: string
+    }
+  }
+
+  interface Size {
+    size?: number
+  }
+
+  const [info, setInfo] = useState<Info>({})
+  const [size, setSize] = useState<Size>({})
 
   useEffect(() => {
     if (!info.metadata) {
-      getInfo(sandboxes.dependency).then(setInfo)
+      getInfo(dependency).then(setInfo)
     }
     if (!size.size) {
-      getSize(sandboxes.dependency).then(setSize)
+      getSize(dependency).then(setSize)
     }
   }, [])
 
-  const downloads = info ? (info.npm || {}).downloads : 0
-  const links = info ? (info.metadata || {}).links : {}
+  const downloads = info.npm?.downloads ?? 0
+  const links = info.metadata?.links || {}
 
   if (!info) return null
 
@@ -111,7 +145,7 @@ const Sidebar = ({ sandboxes }) => {
         css={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          borderTop: '1px solid' + designLanguage.colors.grays[600]
+          borderTop: '1px solid' + theme.colors.grays[600]
         }}
         marginTop={28}
         paddingTop={4}
@@ -188,7 +222,7 @@ const Sidebar = ({ sandboxes }) => {
         </Element>
       )}
       <Text
-        css={{ borderTop: '1px solid' + designLanguage.colors.grays[600] }}
+        css={{ borderTop: '1px solid' + theme.colors.grays[600] }}
         marginTop={28}
         paddingTop={4}
         block
@@ -233,7 +267,7 @@ const Sidebar = ({ sandboxes }) => {
         <>
           <Text
             block
-            css={{ borderTop: '1px solid' + designLanguage.colors.grays[600] }}
+            css={{ borderTop: '1px solid' + theme.colors.grays[600] }}
             marginTop={28}
             paddingTop={4}
             weight="bold"
@@ -251,7 +285,7 @@ const Sidebar = ({ sandboxes }) => {
             }}
             gap={2}
           >
-            {info.metadata.maintainers.map(maintainer => (
+            {info.metadata.maintainers.map((maintainer) => (
               <Link
                 key={maintainer.username}
                 href={`https://github.com/${maintainer.username}`}
@@ -265,8 +299,8 @@ const Sidebar = ({ sandboxes }) => {
                     height: 32,
                     overflow: 'hidden',
                     background: 'white',
-                    'border-radius': designLanguage.radii.small + 'px',
-                    border: '1px solid' + designLanguage.colors.grays[600]
+                    'border-radius': theme.radii.small + 'px',
+                    border: '1px solid' + theme.colors.grays[600]
                   }}
                   src={`https://github.com/${maintainer.username}.png?size=40`}
                   alt={maintainer.username}

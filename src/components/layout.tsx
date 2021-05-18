@@ -51,6 +51,13 @@ const Main = styled.main`
       'grid '
       'aside';
   }
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 300px;
+    grid-template-areas:
+      'header .'
+      'grid aside';
+  }
 `
 
 const Layout: React.FC = ({ children }) => {
