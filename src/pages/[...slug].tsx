@@ -1,17 +1,29 @@
 import { GetStaticProps, GetStaticPaths } from 'next'
+import { useRouter } from 'next/router'
+
 import { searchDependency } from '../services/algolia'
+import SEO from '../components/seo'
 
 const HomePage: React.FC<{ sandboxes?: any[]; dependency?: string }> = ({
   sandboxes,
   dependency
 }) => {
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
   return (
-    <div>
-      {dependency}
-      {sandboxes?.map((e) => (
-        <p>{e.title}</p>
-      ))}
-    </div>
+    <>
+      <SEO pkg={dependency} title={`${dependency} examples - CodeSandbox`} />
+      <div>
+        {dependency}
+        {sandboxes?.map((e) => (
+          <p>{e.title}</p>
+        ))}
+      </div>
+    </>
   )
 }
 
