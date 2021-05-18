@@ -7,9 +7,9 @@ import {
   SearchInput
 } from '@codesandbox/components'
 import Logo from './logo'
-import designLanguage from '@codesandbox/components/lib/design-language/index'
+import { theme } from './theme'
 
-const Header = () => {
+const Header: React.FC<{ siteTitle: string }> = () => {
   const [value, setValue] = useState('')
   return (
     <Element
@@ -18,7 +18,7 @@ const Header = () => {
       marginBottom={52}
       css={{
         borderBottom: '1px solid',
-        borderColor: designLanguage.colors.grays[600],
+        borderColor: theme.colors.grays[600],
         padding: '.5em 1rem',
         maxHeight: 'max-content'
       }}
@@ -38,9 +38,11 @@ const Header = () => {
           <SearchInput
             style={{ padding: '0 1.5rem', margin: '0 0 0 -.25rem' }}
             placeholder="Search CodeSandbox"
-            onChange={e => setValue(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setValue(e.target.value)
+            }
             value={value}
-            onKeyDown={e => {
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
               if (e.key === 'Enter' && typeof window !== 'undefined') {
                 window.location.href = `https://codesandbox.io/search?query=${value}&page=1&configure%5BhitsPerPage%5D=12`
               }
@@ -51,7 +53,6 @@ const Header = () => {
             variant="secondary"
             as="a"
             href="https://codesandbox.io/s"
-            type="link"
             style={{
               textDecoration: 'none',
               width: 'auto',

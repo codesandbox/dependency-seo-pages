@@ -4,12 +4,9 @@ import normalize from 'normalize.css'
 
 import Footer from './footer'
 import { ThemeProvider } from '@codesandbox/components'
-import designLanguageType from '@codesandbox/components/lib/design-language/colors'
-import designLanguage from '@codesandbox/components/lib/design-language'
 
 import Header from './header'
-
-const theme = designLanguage as typeof designLanguageType
+import { theme } from './theme'
 
 const Style = createGlobalStyle`
   ${normalize}
@@ -57,7 +54,7 @@ const Main = styled.main`
 
 const Layout: React.FC = ({ children }) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <>
         <Style />
         <Header siteTitle="Dependency Page" />
