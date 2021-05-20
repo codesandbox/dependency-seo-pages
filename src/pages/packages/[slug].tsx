@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next'
 
-import { searchDependency } from '../services/algolia'
-import SEO from '../components/seo'
-import Main from '../components/main'
-import { getPackageInfo, PackageInfo } from '../services/packageIndo'
+import { searchDependency } from '../../services/algolia'
+import SEO from '../../components/seo'
+import Main from '../../components/main'
+import { getPackageInfo, PackageInfo } from '../../services/packageIndo'
 
 const HomePage: React.FC<{
   sandboxes?: any[]
@@ -25,14 +25,13 @@ const HomePage: React.FC<{
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { slug } = context.params
+  const { slug: packageName } = context.params
 
   // No valid slug
-  if (!Array.isArray(slug) || !slug[1]) {
+  if (Array.isArray(packageName) || !packageName) {
     return { notFound: true }
   }
 
-  const [_, packageName] = slug
   const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
   const packageInfo = await getPackageInfo(packageName)
 
