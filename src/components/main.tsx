@@ -181,7 +181,7 @@ const Main: React.FC<{
 
           {hasMoreToLoad && (
             <Button
-              as="a"
+              as={({ type: _, ...props }: any) => <a {...props} />}
               marginTop={4}
               style={{ textDecoration: 'none' }}
               href={getUrlLoadMore(packageName)}
