@@ -30,6 +30,7 @@ const Style = createGlobalStyle`
 
 const Main = styled.main`
   margin: 0 auto;
+  margin-bottom: 6em;
   max-width: 1200px;
   padding: 0 1rem;
   display: grid;
