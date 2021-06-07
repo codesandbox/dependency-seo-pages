@@ -49,7 +49,7 @@ const getSize = async (name: string): Promise<{ size: number } | null> => {
 }
 
 export interface PackageInfo {
-  size?: { size: number } | null
+  size?: number | null
   info?: Info | null
 }
 
@@ -57,7 +57,9 @@ export const getPackageInfo = async (
   packageName: string
 ): Promise<PackageInfo> => {
   const info = (await getNpmData(packageName)) ?? null
-  const size = (await getSize(packageName)) ?? null
+  const size = (await getSize(packageName)).size ?? null
+
+  console.log(size)
 
   return { info, size }
 }

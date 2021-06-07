@@ -127,7 +127,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
               Size
             </Text>
             <Text block paddingTop={1}>
-              {size.size / 1000}Kb
+              {size / 1000}Kb
             </Text>
           </Element>
         )}
