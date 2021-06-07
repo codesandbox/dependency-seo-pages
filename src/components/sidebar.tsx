@@ -59,7 +59,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
   const downloads = info?.npm?.downloads ?? 0
   const links = info?.metadata?.links || {}
 
-  if (!info || !size) return null
+  if (!info && !size) return null
 
   return info.metadata ? (
     <Wrapper as="aside">
