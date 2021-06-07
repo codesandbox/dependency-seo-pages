@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Text, Element, Stack, Link } from '@codesandbox/components'
 import styled from 'styled-components'
 import { GlobeIcon, GHIcon, IssuesIcon, NPMIcon } from './icons'
 import { theme } from './theme'
 import { cleanNPM, cleanURL, numberWithCommas } from './utils'
-import { PackageInfo } from '../services/packageIndo'
+import { PackageInfo } from '../services/packageInfo'
 
 const Wrapper = styled(Element)`
   background: ${theme.colors.grays[700]};

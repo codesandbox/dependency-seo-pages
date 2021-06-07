@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import { searchDependency } from '../../services/algolia'
 import SEO from '../../components/seo'
 import Main from '../../components/main'
-import { getPackageInfo, PackageInfo } from '../../services/packageIndo'
+import { getPackageInfo, PackageInfo } from '../../services/packageInfo'
 
 const HomePage: React.FC<{
   sandboxes?: any[]
@@ -34,6 +34,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
   const packageInfo = await getPackageInfo(packageName)
+
+  // No data
+  if (!sandboxes) {
+    return { notFound: true }
+  }
 
   return {
     props: { sandboxes, packageName, hasMoreToLoad, packageInfo }

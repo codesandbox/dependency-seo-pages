@@ -40,7 +40,7 @@ const getNpmData = async (name: string): Promise<Info> => {
   return data.collected
 }
 
-const getSize = async (name: string): Promise<{ size: number }> => {
+const getSize = async (name: string): Promise<{ size: number } | null> => {
   const data = await fetch(
     `https://bundlephobia.com/api/size?package=${name}`
   ).then((rsp) => rsp.json())
