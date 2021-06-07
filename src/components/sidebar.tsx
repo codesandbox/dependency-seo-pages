@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Text, Element, Stack, Link } from '@codesandbox/components'
 import styled from 'styled-components'
 import { GlobeIcon, GHIcon, IssuesIcon, NPMIcon } from './icons'
 import { theme } from './theme'
 import { cleanNPM, cleanURL, numberWithCommas } from './utils'
-import { PackageInfo } from '../services/packageIndo'
+import { PackageInfo } from '../services/packageInfo'
 
 const Wrapper = styled(Element)`
   background: ${theme.colors.grays[700]};
@@ -56,12 +56,12 @@ const getSize = async (name: string) => {
 const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
   const { info, size } = packageInfo
 
-  const downloads = info.npm?.downloads ?? 0
-  const links = info.metadata?.links || {}
+  const downloads = info?.npm?.downloads ?? 0
+  const links = info?.metadata?.links || null
 
-  if (!info) return null
+  if (!info && !size) return null
 
-  return info.metadata ? (
+  return info?.metadata && links ? (
     <Wrapper as="aside">
       <Text block weight="bold" size={19}>
         About
@@ -76,7 +76,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
           textOverflow: 'ellipsis'
         }}
       >
-        {info.metadata.description}
+        {info?.metadata.description}
       </Text>
       {downloads && (
         <>
@@ -102,7 +102,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
             Latest version
           </Text>
           <Text block paddingTop={1}>
-            {info.metadata.version}
+            {info?.metadata.version}
           </Text>
         </Element>
         <Element>
@@ -110,7 +110,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
             License
           </Text>
           <Text block paddingTop={1}>
-            {info.metadata.license}
+            {info?.metadata.license}
           </Text>
         </Element>
       </Element>
@@ -131,18 +131,18 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
             </Text>
           </Element>
         )}
-        {info.npm && (
+        {info?.npm && (
           <Element>
             <Text block variant="muted">
               Packages Using it
             </Text>
             <Text block paddingTop={1}>
-              {info.npm.dependentsCount}
+              {info?.npm.dependentsCount}
             </Text>
           </Element>
         )}
       </Element>
-      {info.github && (
+      {info?.github && (
         <Element
           css={{
             display: 'grid',
@@ -155,7 +155,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
               Issues Count
             </Text>
             <Text block paddingTop={1}>
-              {info.github.issues.count}
+              {info?.github.issues.count}
             </Text>
           </Element>
           <Element>
@@ -163,7 +163,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
               Stars
             </Text>
             <Text block paddingTop={1}>
-              {info.github.starsCount}
+              {info?.github.starsCount}
             </Text>
           </Element>
         </Element>
@@ -210,7 +210,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
           </MaxWithLink>
         </LinkWrapper>
       )}
-      {info.metadata.maintainers && (
+      {info?.metadata.maintainers && (
         <>
           <Text
             block

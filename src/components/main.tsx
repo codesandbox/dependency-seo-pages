@@ -1,6 +1,5 @@
 import React, { CSSProperties } from 'react'
 import { Text, Element, Stack, Link, Button } from '@codesandbox/components'
-import getIcon from '@codesandbox/common/lib/templates/icons'
 import styled from 'styled-components'
 import Sidebar from './sidebar'
 import {
@@ -12,7 +11,7 @@ import {
 } from '../components/utils'
 import { theme } from './theme'
 import { Sandboxes } from '../services/algolia'
-import { PackageInfo } from '../services/packageIndo'
+import { PackageInfo } from '../services/packageInfo'
 
 const ScreenShot = styled.img`
   object-fit: cover;
