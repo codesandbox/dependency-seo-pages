@@ -59,7 +59,5 @@ export const getPackageInfo = async (
   const info = (await getNpmData(packageName)) ?? null
   const size = (await getSize(packageName)).size ?? null
 
-  console.log(size)
-
   return { info, size }
 }
