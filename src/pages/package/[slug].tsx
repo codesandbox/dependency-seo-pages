@@ -35,11 +35,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
   const packageInfo = await getPackageInfo(packageName)
 
-  // No data
-  if (!packageInfo.info || !sandboxes) {
-    return { notFound: true }
-  }
-
   return {
     props: { sandboxes, packageName, hasMoreToLoad, packageInfo }
   }

@@ -56,10 +56,10 @@ const getSize = async (name: string) => {
 const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
   const { info, size } = packageInfo
 
-  const downloads = info.npm?.downloads ?? 0
-  const links = info.metadata?.links || {}
+  const downloads = info?.npm?.downloads ?? 0
+  const links = info?.metadata?.links || {}
 
-  if (!info) return null
+  if (!info || !size) return null
 
   return info.metadata ? (
     <Wrapper as="aside">
@@ -127,7 +127,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
               Size
             </Text>
             <Text block paddingTop={1}>
-              {size / 1000}Kb
+              {size.size / 1000}Kb
             </Text>
           </Element>
         )}
