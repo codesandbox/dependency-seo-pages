@@ -1,7 +1,7 @@
 import { TemplateType } from '@codesandbox/common/lib/templates'
 import algoliaSearch from 'algoliasearch'
 
-const MAX_HITS = 12
+const MAX_HITS = 24
 const APP_ID = process.env.ALGOLIA_APP_ID
 const SEARCH_KEY = process.env.ALGOLIA_SEARCH_KEY
 const SEARCH_INDEX = 'prod_sandboxes'
@@ -29,7 +29,7 @@ export const searchDependency = async (
 }> => {
   const data = await algoliaIndex.search('', {
     facetFilters: [`npm_dependencies.dependency:${packageName}`],
-    hitsPerPage: 13
+    hitsPerPage: MAX_HITS + 1
   })
 
   return {
