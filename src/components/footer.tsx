@@ -65,7 +65,7 @@ const Social = styled.ul`
   }
 `
 
-const Title = styled.h6`
+const Title = styled.p`
   font-style: normal;
   font-weight: 900;
   font-size: 19px;
