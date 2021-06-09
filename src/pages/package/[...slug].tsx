@@ -27,13 +27,12 @@ const HomePage: React.FC<{
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug } = context.params
 
-  let packageName: string
-
   // No valid slug
-  if (!packageName) {
+  if (!context.params.slug) {
     return { notFound: true }
   }
 
+  let packageName: string
   if (Array.isArray(slug)) {
     packageName = slug.join('/')
   } else {
