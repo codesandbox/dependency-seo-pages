@@ -25,11 +25,19 @@ const HomePage: React.FC<{
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { slug: packageName } = context.params
+  const { slug } = context.params
+
+  let packageName: string
 
   // No valid slug
-  if (Array.isArray(packageName) || !packageName) {
+  if (!packageName) {
     return { notFound: true }
+  }
+
+  if (Array.isArray(slug)) {
+    packageName = slug.join('/')
+  } else {
+    packageName = slug
   }
 
   const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
@@ -37,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // No data
   if (sandboxes.length === 0) {
-    return { notFound: true }
+    return { notFound: true, props: { packageName } }
   }
 
   return {
