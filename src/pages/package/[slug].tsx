@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const packageInfo = await getPackageInfo(packageName)
 
   // No data
-  if (!sandboxes) {
+  if (sandboxes.length === 0) {
     return { notFound: true }
   }
 
