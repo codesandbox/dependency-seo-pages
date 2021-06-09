@@ -21,6 +21,11 @@ const SEO: React.FC<{ title: string; pkg: string }> = ({ title, pkg }) => {
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:creator" content="CodeSandbox" />
+
+      <link
+        rel="canonical"
+        href={`https://codesandbox.io/examples/package/${pkg}`}
+      />
     </Head>
   )
 }
