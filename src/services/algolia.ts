@@ -23,10 +23,13 @@ export type Sandboxes = {
 
 export const searchDependency = async (
   packageName: string
-): Promise<{
-  sandboxes: Sandboxes
-  hasMoreToLoad: boolean
-}> => {
+): Promise<
+  | {
+      sandboxes: Sandboxes
+      hasMoreToLoad: boolean
+    }
+  | undefined
+> => {
   const data = await algoliaIndex.search('', {
     facetFilters: [`npm_dependencies.dependency:${packageName}`],
     hitsPerPage: MAX_HITS + 1

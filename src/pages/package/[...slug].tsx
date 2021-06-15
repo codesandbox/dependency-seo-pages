@@ -11,24 +11,17 @@ const HomePage: React.FC<{
   hasMoreToLoad?: boolean
   packageInfo?: PackageInfo
 }> = ({ sandboxes, packageName, packageInfo, hasMoreToLoad }) => {
-  try {
-    return (
-      <>
-        <SEO
-          pkg={packageName}
-          title={`${packageName} examples - CodeSandbox`}
-        />
-        <Main
-          packageName={packageName}
-          packageInfo={packageInfo}
-          sandboxes={sandboxes}
-          hasMoreToLoad={hasMoreToLoad}
-        />
-      </>
-    )
-  } catch (err) {
-    console.error(err)
-  }
+  return (
+    <>
+      <SEO pkg={packageName} title={`${packageName} examples - CodeSandbox`} />
+      <Main
+        packageName={packageName}
+        packageInfo={packageInfo}
+        sandboxes={sandboxes}
+        hasMoreToLoad={hasMoreToLoad}
+      />
+    </>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -46,16 +39,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     packageName = slug
   }
 
-  const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
+  const dependencyData = await searchDependency(packageName)
   const packageInfo = await getPackageInfo(packageName)
 
   // No data
-  if (sandboxes.length === 0) {
+  if (
+    !dependencyData ||
+    !dependencyData.sandboxes ||
+    dependencyData?.sandboxes.length === 0
+  ) {
     return { notFound: true, props: { packageName } }
   }
 
   return {
-    props: { sandboxes, packageName, hasMoreToLoad, packageInfo }
+    props: {
+      sandboxes: dependencyData?.sandboxes ?? null,
+      packageName,
+      hasMoreToLoad: dependencyData?.hasMoreToLoad ?? null,
+      packageInfo
+    }
   }
 }
 
