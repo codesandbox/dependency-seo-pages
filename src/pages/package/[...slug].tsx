@@ -11,48 +11,51 @@ const HomePage: React.FC<{
   hasMoreToLoad?: boolean
   packageInfo?: PackageInfo
 }> = ({ sandboxes, packageName, packageInfo, hasMoreToLoad }) => {
-  return (
-    <>
-      <SEO pkg={packageName} title={`${packageName} examples - CodeSandbox`} />
-      <Main
-        packageName={packageName}
-        packageInfo={packageInfo}
-        sandboxes={sandboxes}
-        hasMoreToLoad={hasMoreToLoad}
-      />
-    </>
-  )
+  try {
+    return (
+      <>
+        <SEO
+          pkg={packageName}
+          title={`${packageName} examples - CodeSandbox`}
+        />
+        <Main
+          packageName={packageName}
+          packageInfo={packageInfo}
+          sandboxes={sandboxes}
+          hasMoreToLoad={hasMoreToLoad}
+        />
+      </>
+    )
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const { slug } = context.params
+  const { slug } = context.params
 
-    // No valid slug
-    if (!context.params.slug) {
-      return { notFound: true }
-    }
+  // No valid slug
+  if (!context.params.slug) {
+    return { notFound: true }
+  }
 
-    let packageName: string
-    if (Array.isArray(slug)) {
-      packageName = slug.join('/')
-    } else {
-      packageName = slug
-    }
+  let packageName: string
+  if (Array.isArray(slug)) {
+    packageName = slug.join('/')
+  } else {
+    packageName = slug
+  }
 
-    const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
-    const packageInfo = await getPackageInfo(packageName)
+  const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
+  const packageInfo = await getPackageInfo(packageName)
 
-    // No data
-    if (sandboxes.length === 0) {
-      return { notFound: true, props: { packageName } }
-    }
+  // No data
+  if (sandboxes.length === 0) {
+    return { notFound: true, props: { packageName } }
+  }
 
-    return {
-      props: { sandboxes, packageName, hasMoreToLoad, packageInfo }
-    }
-  } catch (err) {
-    console.error(err)
+  return {
+    props: { sandboxes, packageName, hasMoreToLoad, packageInfo }
   }
 }
 
