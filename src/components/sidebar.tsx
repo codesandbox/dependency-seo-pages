@@ -48,7 +48,6 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo; packageName: string }> = ({
   useEffect(() => {
     getSize(packageName)
       .then((data) => {
-        console.log(data)
         if (data?.size) {
           setSize(data.size)
         }
