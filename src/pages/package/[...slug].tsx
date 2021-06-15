@@ -25,30 +25,34 @@ const HomePage: React.FC<{
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { slug } = context.params
+  try {
+    const { slug } = context.params
 
-  // No valid slug
-  if (!context.params.slug) {
-    return { notFound: true }
-  }
+    // No valid slug
+    if (!context.params.slug) {
+      return { notFound: true }
+    }
 
-  let packageName: string
-  if (Array.isArray(slug)) {
-    packageName = slug.join('/')
-  } else {
-    packageName = slug
-  }
+    let packageName: string
+    if (Array.isArray(slug)) {
+      packageName = slug.join('/')
+    } else {
+      packageName = slug
+    }
 
-  const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
-  const packageInfo = await getPackageInfo(packageName)
+    const { sandboxes, hasMoreToLoad } = await searchDependency(packageName)
+    const packageInfo = await getPackageInfo(packageName)
 
-  // No data
-  if (sandboxes.length === 0) {
-    return { notFound: true, props: { packageName } }
-  }
+    // No data
+    if (sandboxes.length === 0) {
+      return { notFound: true, props: { packageName } }
+    }
 
-  return {
-    props: { sandboxes, packageName, hasMoreToLoad, packageInfo }
+    return {
+      props: { sandboxes, packageName, hasMoreToLoad, packageInfo }
+    }
+  } catch (err) {
+    console.error(err)
   }
 }
 
