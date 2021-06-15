@@ -30,6 +30,7 @@
     "@codesandbox/common": "^1.0.8",
     "@codesandbox/components": "^0.0.1",
     "@codesandbox/template-icons": "^1.1.0",
+    "@sentry/nextjs": "^6.7.1",
     "algoliasearch": "^4.9.1",
     "next": "^10.2.0",
     "normalize.css": "^8.0.1",

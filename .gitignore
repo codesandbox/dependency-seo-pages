@@ -67,3 +67,4 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 .next
+sentry.properties
