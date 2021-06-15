@@ -191,7 +191,7 @@ const Main: React.FC<{
           )}
         </div>
       </MainComponent>
-      <Sidebar packageInfo={packageInfo} />
+      <Sidebar packageName={packageName} packageInfo={packageInfo} />
     </>
   )
 }

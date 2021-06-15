@@ -40,7 +40,9 @@ const getNpmData = async (name: string): Promise<Info> => {
   return data.collected
 }
 
-const getSize = async (name: string): Promise<{ size: number } | null> => {
+export const getSize = async (
+  name: string
+): Promise<{ size: number } | null> => {
   const data = await fetch(
     `https://bundlephobia.com/api/size?package=${name}`
   ).then((rsp) => rsp.json())
@@ -49,7 +51,6 @@ const getSize = async (name: string): Promise<{ size: number } | null> => {
 }
 
 export interface PackageInfo {
-  size?: number | null
   info?: Info | null
 }
 
@@ -57,7 +58,6 @@ export const getPackageInfo = async (
   packageName: string
 ): Promise<PackageInfo> => {
   const info = (await getNpmData(packageName)) ?? null
-  const size = (await getSize(packageName)).size ?? null
 
-  return { info, size }
+  return { info }
 }

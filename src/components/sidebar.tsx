@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, Element, Stack, Link } from '@codesandbox/components'
 import styled from 'styled-components'
 import { GlobeIcon, GHIcon, IssuesIcon, NPMIcon } from './icons'
 import { theme } from './theme'
 import { cleanNPM, cleanURL, numberWithCommas } from './utils'
-import { PackageInfo } from '../services/packageInfo'
+import { PackageInfo, getSize } from '../services/packageInfo'
 
 const Wrapper = styled(Element)`
   background: ${theme.colors.grays[700]};
@@ -35,29 +35,26 @@ const LinkWrapper = styled(Stack)`
   }
 `
 
-const getInfo = async (name: string) => {
-  const data = await fetch(
-    `https://api.npms.io/v2/package/${name
-      .replace(/\//g, '%2F')
-      .replace(/@/g, '%40')}`
-  ).then((rsp) => rsp.json())
-
-  return data.collected
-}
-
-const getSize = async (name: string) => {
-  const data = await fetch(
-    `https://bundlephobia.com/api/size?package=${name}`
-  ).then((rsp) => rsp.json())
-
-  return data
-}
-
-const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
-  const { info, size } = packageInfo
+const Sidebar: React.FC<{ packageInfo: PackageInfo; packageName: string }> = ({
+  packageInfo,
+  packageName
+}) => {
+  const { info } = packageInfo
+  const [size, setSize] = useState<number | undefined>(undefined)
 
   const downloads = info?.npm?.downloads ?? 0
   const links = info?.metadata?.links || null
+
+  useEffect(() => {
+    getSize(packageName)
+      .then((data) => {
+        console.log(data)
+        if (data?.size) {
+          setSize(data.size)
+        }
+      })
+      .catch(console.error)
+  }, [])
 
   if (!info && !size) return null
 
@@ -121,7 +118,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
         }}
         paddingTop={4}
       >
-        {size && (
+        {size ? (
           <Element>
             <Text block variant="muted">
               Size
@@ -130,7 +127,7 @@ const Sidebar: React.FC<{ packageInfo: PackageInfo }> = ({ packageInfo }) => {
               {size / 1000}Kb
             </Text>
           </Element>
-        )}
+        ) : null}
         {info?.npm && (
           <Element>
             <Text block variant="muted">
