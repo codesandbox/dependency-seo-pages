@@ -42,8 +42,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const dependencyData = await searchDependency(packageName)
   const packageInfo = await getPackageInfo(packageName)
 
-  console.log('dependencyData', dependencyData.sandboxes.length)
-
   // No data
   if (
     !dependencyData ||
@@ -52,6 +50,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   ) {
     return { notFound: true, props: { packageName } }
   }
+
+  console.log(dependencyData?.sandboxes.length ?? null)
+  console.log(packageName)
+  console.log(dependencyData?.hasMoreToLoad ?? null)
+  console.log(packageInfo)
 
   return {
     props: {
