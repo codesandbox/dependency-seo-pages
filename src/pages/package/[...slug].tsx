@@ -54,7 +54,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log(dependencyData?.sandboxes.length ?? null)
   console.log(packageName)
   console.log(dependencyData?.hasMoreToLoad ?? null)
-  console.log(packageInfo)
 
   return {
     props: {
