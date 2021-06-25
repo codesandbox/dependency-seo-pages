@@ -39,10 +39,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     packageName = slug
   }
 
-  // const dependencyData = await searchDependency(packageName)
-  // const packageInfo = await getPackageInfo(packageName)
+  const dependencyData = await searchDependency(packageName)
+  const packageInfo = await getPackageInfo(packageName)
 
-  // // No data
+  // No data
   // if (
   //   !dependencyData ||
   //   !dependencyData.sandboxes ||
@@ -53,10 +53,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      sandboxes: [],
-      packageName: '',
-      hasMoreToLoad: false,
-      packageInfo: {}
+      sandboxes: dependencyData?.sandboxes ?? null,
+      packageName,
+      hasMoreToLoad: dependencyData?.hasMoreToLoad ?? null,
+      packageInfo
     }
   }
 }
