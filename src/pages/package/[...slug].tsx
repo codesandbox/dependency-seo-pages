@@ -11,9 +11,13 @@ const HomePage: React.FC<{
   hasMoreToLoad?: boolean
   packageInfo?: PackageInfo
 }> = ({ sandboxes, packageName, packageInfo, hasMoreToLoad }) => {
+  console.log(sandboxes.length ?? null)
+  console.log(packageName)
+  console.log(hasMoreToLoad ?? null)
+
   return (
     <>
-      <SEO pkg={packageName} title={`${packageName} examples - CodeSandbox`} />
+      {/* <SEO pkg={packageName} title={`${packageName} examples - CodeSandbox`} /> */}
       <Main
         packageName={packageName}
         packageInfo={packageInfo}
@@ -50,10 +54,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   ) {
     return { notFound: true, props: { packageName } }
   }
-
-  console.log(dependencyData?.sandboxes.length ?? null)
-  console.log(packageName)
-  console.log(dependencyData?.hasMoreToLoad ?? null)
 
   return {
     props: {

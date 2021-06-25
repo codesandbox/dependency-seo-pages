@@ -24,16 +24,6 @@ const MainComponent = styled.div`
   grid-template-columns: 1fr;
 `
 
-const IconHolder = styled.div`
-  width: 24px;
-  height: 24px;
-  padding: 0.25rem;
-  > svg {
-    width: 1rem !important;
-    height: 1rem !important;
-  }
-`
-
 const List = styled.div`
   overflow: hidden;
   display: grid;
@@ -107,7 +97,6 @@ const Main: React.FC<{
           <List>
             {sandboxes.map((a) => {
               const url = getUrlSandbox(a.objectID)
-              // const IconTemplate = getIcon(a.template || 'static')
 
               return (
                 <Card key={a.objectID}>
@@ -169,8 +158,6 @@ const Main: React.FC<{
                       ) : (
                         <Element />
                       )}
-
-                      <IconHolder>{/* <IconTemplate /> */}</IconHolder>
                     </Stack>
                   </Element>
                 </Card>
