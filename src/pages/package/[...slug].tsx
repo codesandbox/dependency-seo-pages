@@ -11,7 +11,6 @@ const HomePage: React.FC<{
   hasMoreToLoad?: boolean
   packageInfo?: PackageInfo
 }> = ({ sandboxes, packageName, packageInfo, hasMoreToLoad }) => {
-  return null
   return (
     <>
       <SEO pkg={packageName} title={`${packageName} examples - CodeSandbox`} />
@@ -40,24 +39,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     packageName = slug
   }
 
-  const dependencyData = await searchDependency(packageName)
-  const packageInfo = await getPackageInfo(packageName)
+  // const dependencyData = await searchDependency(packageName)
+  // const packageInfo = await getPackageInfo(packageName)
 
-  // No data
-  if (
-    !dependencyData ||
-    !dependencyData.sandboxes ||
-    dependencyData?.sandboxes.length === 0
-  ) {
-    return { notFound: true, props: { packageName } }
-  }
+  // // No data
+  // if (
+  //   !dependencyData ||
+  //   !dependencyData.sandboxes ||
+  //   dependencyData?.sandboxes.length === 0
+  // ) {
+  //   return { notFound: true, props: { packageName } }
+  // }
 
   return {
     props: {
-      sandboxes: dependencyData?.sandboxes ?? null,
-      packageName,
-      hasMoreToLoad: dependencyData?.hasMoreToLoad ?? null,
-      packageInfo
+      sandboxes: [],
+      packageName: '',
+      hasMoreToLoad: false,
+      packageInfo: {}
     }
   }
 }
