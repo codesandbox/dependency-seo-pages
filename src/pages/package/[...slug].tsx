@@ -51,6 +51,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { notFound: true, props: { packageName } }
   }
 
+  console.log(dependencyData?.sandboxes ?? null)
+
   return {
     props: {
       sandboxes: [],
