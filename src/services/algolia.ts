@@ -35,8 +35,12 @@ export const searchDependency = async (
     hitsPerPage: MAX_HITS + 1
   })
 
+  const filterData = data.hits.map(({ npm_dependencies, ...rest }: any) => ({
+    ...rest
+  }))
+
   return {
-    sandboxes: data.hits.slice(0, MAX_HITS),
-    hasMoreToLoad: data.hits.length > MAX_HITS
+    sandboxes: filterData.slice(0, MAX_HITS),
+    hasMoreToLoad: filterData.length > MAX_HITS
   }
 }
