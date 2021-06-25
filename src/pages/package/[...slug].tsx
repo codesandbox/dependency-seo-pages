@@ -42,6 +42,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const dependencyData = await searchDependency(packageName)
   const packageInfo = await getPackageInfo(packageName)
 
+  console.log(dependencyData, packageInfo)
+
   // No data
   if (
     !dependencyData ||
