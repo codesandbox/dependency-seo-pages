@@ -53,10 +53,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      sandboxes: dependencyData?.sandboxes ?? null,
+      sandboxes: [],
       packageName,
       hasMoreToLoad: dependencyData?.hasMoreToLoad ?? null,
-      packageInfo: {}
+      packageInfo
     }
   }
 }
