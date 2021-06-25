@@ -11,6 +11,7 @@ const HomePage: React.FC<{
   hasMoreToLoad?: boolean
   packageInfo?: PackageInfo
 }> = ({ sandboxes, packageName, packageInfo, hasMoreToLoad }) => {
+  return null
   return (
     <>
       <SEO pkg={packageName} title={`${packageName} examples - CodeSandbox`} />
